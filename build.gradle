@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group = 'com.github.YueWenFan'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/YueWenFan/github-package-gradle-demo")
+            credentials {
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            // 该部分指定要发布的组件，这里使用 `components.java`
+            // 它表示当前 Gradle 项目的 Java 组件（即默认构建的 jar 包）
+            from components.java
+        }
+    }
+}

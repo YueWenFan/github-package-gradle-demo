@@ -11,7 +11,8 @@ java {
     }
 }
 
-version = gradle.properties['version'] ?: '1.0.0' // 默认版本号为 1.0.0
+version = System.getenv('VERSION') ?: '1.0.0' // 默认版本号为 1.0.0
+println "Using version: $version"
 
 publishing {
     repositories {

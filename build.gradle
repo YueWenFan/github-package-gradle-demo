@@ -11,18 +11,18 @@ java {
     }
 }
 
-// 使用 Git 标签来设置版本号
-def getGitTagVersion() {
-    def version = "unspecified"
-    try {
-        version = "v" + "git describe --tags".execute().text.trim()
-    } catch (Exception e) {
-        println "Git tag not found. Using fallback version."
-    }
-    return version
-}
+// // 使用 Git 标签来设置版本号
+// def getGitTagVersion() {
+//     def version = "unspecified"
+//     try {
+//         version = "v" + "git describe --tags".execute().text.trim()
+//     } catch (Exception e) {
+//         println "Git tag not found. Using fallback version."
+//     }
+//     return version
+// }
 
-version = getGitTagVersion() // 动态版本号
+// version = getGitTagVersion() // 动态版本号
 
 publishing {
     repositories {

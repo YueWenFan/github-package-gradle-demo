@@ -39,7 +39,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build and publish to Git Hub Packages
-        run: ./gradlew publish
+        run: ./gradlew publish --no-daemon
         env:
           GPR_USER: ${{ github.actor }}
           GPR_TOKEN: ${{ secrets.GITHUB_TOKEN }}

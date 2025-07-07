@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - 'v*'  # 当 Git 标签推送时触发工作流
 
 permissions:
   contents: read
@@ -22,6 +24,16 @@ jobs:
         with:
           distribution: 'temurin'  # 可选：temurin 是 OpenJDK 的一种
           java-version: 17
+
+      - name: Generate version number based on Git tag
+        id: version
+        run: |
+          VERSION=$(git describe --tags --always)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Set version in gradle.properties
+        run: |
+          echo "version=${{ env.VERSION }}" >> gradle.properties
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
